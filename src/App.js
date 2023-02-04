@@ -96,7 +96,7 @@ export default function App() {
 
   // Navbar drawer functionality
 
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -118,7 +118,9 @@ export default function App() {
     onSnapshot(q, (snapshot) => {
       // Set Entries state variable to the current snapshot
       // For each entry, appends the document ID as an object property along with the existing document data
-      setEntries(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })))
+
+      // added collapsed object property to allow individual entry boxes to be dropdown-ed
+      setEntries(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id, collapsed: true})))
     })
   }, [currentUser]);
 
